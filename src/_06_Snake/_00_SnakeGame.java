@@ -85,7 +85,7 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		//2. Use a switch statement to determine which difficulty was chosen.
 		//   Use timer.setDelay(delay) with different numbers to change the speed
 		//   of the game. The smaller the number, the faster it goes.
-		switch (options) {
+		switch (choice) {
 			case "Expert":
 				timer.setDelay(100);
 				break;
@@ -162,8 +162,9 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		//   reset the snake and the food and start the timer
 		//   else, exit the game
 		if(ans.equalsIgnoreCase("yes")) {
-			snake.reset(loc);
-			
+			Location startLoc = new Location(375, 300);
+			snake.reset(startLoc);
+			timer.restart();
 		}
 	}
 
@@ -183,8 +184,9 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		}
 		//3. if the location of the head is equal to the location of the food,
 		// 	 feed the snake and set the food location
-		if(snake.getHeadLocation()==foodLocation) {
+		if(snake.getHeadLocation().equals(foodLocation)) {
 			snake.feed();
+			setFoodLocation();
 		}
 		//4. call panel.repaint();
 		panel.repaint();
